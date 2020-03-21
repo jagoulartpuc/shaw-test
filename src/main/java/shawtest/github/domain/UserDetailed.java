@@ -3,7 +3,7 @@ package shawtest.github.domain;
 import lombok.Data;
 
 @Data
-public class User {
+public class UserDetailed {
 
     private String login;
     private long id;
@@ -23,5 +23,17 @@ public class User {
     private String received_events_url;
     private String type;
     private boolean site_admin;
-
+    private String name;
+    private String company;
+    private String blog;
+    private String location;
+    private String email;
+    private String hireable;
+    private String bio;
+    private int public_repos;
+    private int public_gists;
+    private int followers;
+    private String following;
+    private String created_at;
+    private String updated_at;
 }

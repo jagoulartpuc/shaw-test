@@ -1,10 +1,12 @@
 package shawtest.github.service;
-
+;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import shawtest.github.domain.Repository;
 import shawtest.github.domain.User;
+import shawtest.github.domain.UserDetailed;
 import shawtest.github.http.RestClient;
 
 @Service
@@ -17,19 +19,11 @@ public class UserService {
         return  restClient.getGithubUsers(uri);
     }
 
-    private User getUserById(long id, List<User> users) {
-        return users.stream()
-                .filter(u -> u.getId() == id)
-                .findFirst()
-                .orElseThrow();
+    public UserDetailed getGithubUserDetails(String uri) {
+        return restClient.getGithubUserDetails(uri);
     }
 
-    public User getGithubUserDetails(String login) { return new User();}
-
-    private User getUserByLogin(String login, List<User> users) {
-        return users.stream()
-                .filter(u -> u.getLogin().equals(login))
-                .findFirst()
-                .orElseThrow();
+    public List<Repository> getGithubUserRepositories(String uri) {
+        return restClient.getGithubUserRepos(uri);
     }
 }

@@ -10,7 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
+import shawtest.github.domain.Repository;
 import shawtest.github.domain.User;
+import shawtest.github.domain.UserDetailed;
 
 
 @Data
@@ -35,5 +37,22 @@ public class RestClient {
         this.setStatus(responseEntity.getStatusCode());
         return responseEntity.getBody();
     }
+
+    public UserDetailed getGithubUserDetails(String uri) {
+        HttpEntity<String> requestEntity = new HttpEntity<>("", headers);
+        var type = new ParameterizedTypeReference<UserDetailed>() {};
+        ResponseEntity<UserDetailed> responseEntity = rest.exchange(uri, HttpMethod.GET, requestEntity, type);
+        this.setStatus(responseEntity.getStatusCode());
+        return responseEntity.getBody();
+    }
+
+    public List<Repository> getGithubUserRepos(String uri) {
+        HttpEntity<String> requestEntity = new HttpEntity<>("", headers);
+        var type = new ParameterizedTypeReference<List<Repository>>() {};
+        ResponseEntity<List<Repository>> responseEntity = rest.exchange(uri, HttpMethod.GET, requestEntity, type);
+        this.setStatus(responseEntity.getStatusCode());
+        return responseEntity.getBody();
+    }
+
 
 }
